@@ -81,3 +81,14 @@ editBtn.addEventListener("click", (event) => { // event listener
 
     ticketContainerG.appendChild(newCard) // append new card to ticket container
 }
+createTicketCard("Jason Miller", "Billing Issue", "high-priority-ticket-card", "High Priority", "ticket1") // creation of ticket1
+createTicketCard("Galo Rebelo", "Return Policy", "medium-priority-ticket-card", "Medium Priority", "ticket2") // creation of ticket2
+createTicketCard("Eric Torres", "Product Damage", "low-priority-ticket-card", "Low Priority", "ticket3") // creation of ticket3
+
+// Task 3: Converting NodeLists to Arrays for Bulk Updates
+const allHighPriorityTickets = document.querySelectorAll(".high-priority-ticket-card") // find all high priority ticket cards
+allHighPriorityTicketsArray = Array.from(allHighPriorityTickets) // create array of all high priority cards
+
+allHighPriorityTicketsArray.forEach(card => { // for each card in the array
+    card.style.backgroundColor = "powderblue" // background color set to powderblue
+})
