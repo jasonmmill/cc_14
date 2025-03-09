@@ -31,3 +31,14 @@ function createTicketCard(name, issue, cssClass, ticketClass, id) { // function 
     newCard.appendChild(ticketBr) // append to new card
     newCard.appendChild(ticketBr2) // append to new card  
     newCard.appendChild(deleteBtn) // append to new card
+
+// Task 4: Implementing Ticket Resolution with Event Bubbling 
+newCard.addEventListener("click", () => { // event listener
+    console.log(`Clicked ${newCard.id}`) // log message with new card id on click
+})
+
+deleteBtn.addEventListener("click", (event) => { // event listener
+    newCard.remove() // remove card on click
+    event.stopPropagation() // stops bubbling
+})
+// End Task 4
