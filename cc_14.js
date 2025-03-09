@@ -33,14 +33,14 @@ function createTicketCard(name, issue, cssClass, ticketClass, id) { // function 
     newCard.appendChild(deleteBtn) // append to new card
 
 // Task 4: Implementing Ticket Resolution with Event Bubbling 
-    newCard.addEventListener("click", () => { // event listener
-        console.log(`Clicked ${newCard.id}`) // log message with new card id on click
-    })
+newCard.addEventListener("click", () => { // event listener
+    console.log(`Clicked ${newCard.id}`) // log message with new card id on click
+})
 
-    deleteBtn.addEventListener("click", (event) => { // event listener
-        newCard.remove() // remove card on click
-        event.stopPropagation() // stops bubbling
-    })
+deleteBtn.addEventListener("click", (event) => { // event listener
+    newCard.remove() // remove card on click
+    event.stopPropagation() // stops bubbling
+})
 // End Task 4
 
 // Task 5: Additional Challenge - Inline Editing of Support Tickets
@@ -81,7 +81,6 @@ editBtn.addEventListener("click", (event) => { // event listener
 
     ticketContainerG.appendChild(newCard) // append new card to ticket container
 }
-
 createTicketCard("Jason Miller", "Billing Issue", "high-priority-ticket-card", "High Priority", "ticket1") // creation of ticket1
 createTicketCard("Galo Rebelo", "Return Policy", "medium-priority-ticket-card", "Medium Priority", "ticket2") // creation of ticket2
 createTicketCard("Eric Torres", "Product Damage", "low-priority-ticket-card", "Low Priority", "ticket3") // creation of ticket3
