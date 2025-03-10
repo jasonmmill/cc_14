@@ -4,9 +4,9 @@
 const ticketContainerG = document.getElementById("ticketContainer") // select employee container
 const ticketContainerQ = document.querySelector("ticketContainer") // select employee container
 
-function createTicketCard(name, issue, cssClass, ticketClass, id) { // function to create employee card
+function createTicketCard(name, issue, classList, id) { // function to create employee card
     const newCard = document.createElement("div") // create div tag
-    newCard.setAttribute("class", cssClass) // set id
+    newCard.setAttribute("class", classList) // set id
     newCard.setAttribute("id", id) // set id
 
     const ticketName = document.createElement("h3") // create h3 to house name
@@ -16,7 +16,7 @@ function createTicketCard(name, issue, cssClass, ticketClass, id) { // function 
     ticketIssue.textContent = issue
 
     const ticketLabel = document.createElement("label")
-    ticketLabel.textContent = ticketClass
+    ticketLabel.textContent = classList
 
     const ticketBr = document.createElement("br")
     const ticketBr2 = document.createElement("br")
@@ -71,22 +71,37 @@ editBtn.addEventListener("click", (event) => { // event listener
     newCard.appendChild(labelInput) // append to empty new card
     newCard.appendChild(saveBtn) // append to empty new card
 
+    function updateTicketPriority(ticket, newPriority) { // function designed to dynamically change color of cards if priority is edited
+        ticket.classList.remove("low-priority", "medium-priority", "high-priority"); // deletes current priority
+        if (newPriority.toLowerCase() === "high") { // based on input
+            ticket.classList.add("high-priority"); // add high priority
+        } else if (newPriority.toLowerCase() === "medium") { // based on input
+            ticket.classList.add("medium-priority"); // add medium priority
+        } else {
+            ticket.classList.add("low-priority"); // add low priority
+        }
+    }
+    updateTicketPriority(newCard, labelInput.value) // call function 
+
     saveBtn.addEventListener("click", (event) => { // event listener
         event.stopPropagation() // stops bubbling
         newCard.innerHTML = `<h3>${nameInput.value}</h3><p>${issueInput.value}</p><label>${labelInput.value}</label><br><br>` // new html
         newCard.appendChild(editBtn) // append new input to new card
         newCard.appendChild(deleteBtn) // append new input to new card
+        updateTicketPriority(newCard, labelInput.value)
+    
     })});
 // End Task 5
 
     ticketContainerG.appendChild(newCard) // append new card to ticket container
+
 }
-createTicketCard("Jason Miller", "Billing Issue", "high-priority-ticket-card", "High Priority", "ticket1") // creation of ticket1
-createTicketCard("Galo Rebelo", "Return Policy", "medium-priority-ticket-card", "Medium Priority", "ticket2") // creation of ticket2
-createTicketCard("Eric Torres", "Product Damage", "low-priority-ticket-card", "Low Priority", "ticket3") // creation of ticket3
+createTicketCard("Jason Miller", "Billing Issue", "high-priority", "ticket1") // creation of ticket1
+createTicketCard("Galo Rebelo", "Return Policy", "medium-priority", "ticket2") // creation of ticket2
+createTicketCard("Eric Torres", "Product Damage", "low-priority", "ticket3") // creation of ticket3
 
 // Task 3: Converting NodeLists to Arrays for Bulk Updates
-const allHighPriorityTickets = document.querySelectorAll(".high-priority-ticket-card") // find all high priority ticket cards
+const allHighPriorityTickets = document.querySelectorAll(".high-priority") // find all high priority ticket cards
 allHighPriorityTicketsArray = Array.from(allHighPriorityTickets) // create array of all high priority cards
 
 allHighPriorityTicketsArray.forEach(card => { // for each card in the array
